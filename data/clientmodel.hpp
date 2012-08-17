@@ -9,7 +9,7 @@
 #include "../network/client.hpp"
 
 /**
-  Stores a set of clients and interfaces with the client table in the UI
+  Stores a set of clients and interfaces with the client table in the UI.
   */
 class ClientModel : public QAbstractTableModel, QList<Client *> //Multiple inheritance yay!
 {

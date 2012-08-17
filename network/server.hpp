@@ -8,6 +8,8 @@
 #include <QtNetwork/QTcpServer>
 
 #include "client.hpp"
+#include "protocol/protocol.hpp"
+#include "protocol/jsonprotocol.hpp"
 #include "data/clientmodel.hpp"
 
 /**
@@ -19,7 +21,7 @@ class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(ClientModel * model, QObject * parent = 0);
+    explicit Server(ClientModel * model, ColonyModel * colonyModel, QObject * parent);
 
 protected:
     //Override from QTcpServer
@@ -31,10 +33,19 @@ private:
     static const int port;
 
     /**
-      The data model
+      The client data model
       */
     ClientModel *model;
 
+    /**
+      The colony data model
+      */
+    ColonyModel *colonyModel;
+
+    /**
+      The protocol that handles the response
+      */
+    Protocol *protocol;
 
 signals:
 

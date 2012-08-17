@@ -3,11 +3,12 @@
 //Define constants
 const int Server::port = 7510;
 
-Server::Server(ClientModel *model, QObject *parent) :
+Server::Server(ClientModel *model, ColonyModel *colonyModel, QObject *parent) :
     QTcpServer(parent)
 {
     Q_ASSERT(model != 0);
     this->model = model;
+    this->colonyModel = colonyModel;
 }
 
 
@@ -33,6 +34,12 @@ void Server::incomingConnection(int handle) {
 
     //Hook up signals
     connect(newClient, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketError(QAbstractSocket::SocketError)));
+
+    //Hook up the socket to a protocol object
+    //Create it as a child of the socket so they'll get deleted at the same time
+    Protocol *protocol = new JSONProtocol(newClient);
+    protocol->setIODevice(newClient);
+    protocol->setModel(colonyModel);
 
     model->appendClient(newClient); // Add the new client to the data model
 

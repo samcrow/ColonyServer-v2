@@ -16,18 +16,18 @@ SOURCES += main.cpp\
 	data/clientmodel.cpp \
 	network/client.cpp \
 	network/server.cpp \
-	protocol/protocolinterface.cpp \
 	data/colonymodel.cpp \
-	protocol/jsonprotocolinterface.cpp
+    protocol/protocol.cpp \
+    protocol/jsonprotocol.cpp
 
 HEADERS  += colonyserver.hpp \
 	network/networkconfigurator.hpp \
 	data/clientmodel.hpp \
 	network/client.hpp \
 	network/server.hpp \
-	protocol/protocolinterface.hpp \
 	data/colonymodel.hpp \
-	protocol/jsonprotocolinterface.hpp
+    protocol/protocol.hpp \
+    protocol/jsonprotocol.hpp
 
 FORMS    += colonyserver.ui
 

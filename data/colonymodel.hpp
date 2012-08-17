@@ -8,7 +8,13 @@
 
 #include <colony.hpp>
 
-class ColonyModel : public QAbstractTableModel, QList<Colony *>
+/**
+  A list of colonies that can act as a model for a table/tree/whatever view
+
+  IMPORTANT: Do not use append() or removeOne() or any similar function to modify this method.
+  Use appendColony() and removeColony() instead.
+  */
+class ColonyModel : public QAbstractTableModel, public QList<Colony *>
 {
     Q_OBJECT
 public:
@@ -24,6 +30,10 @@ public:
     void appendColony(Colony *const&t);
     /** Remove a colony from the model */
     void removeColony(Colony *const&t);
+
+
+    /** Find a colony with a given ID. Returns NULL if no such colony exists. */
+    Colony *getColonyById(int id);
 
 signals:
 

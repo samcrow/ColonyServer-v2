@@ -9,7 +9,7 @@ ColonyServer::ColonyServer(QWidget *parent) :
 
     clientModel = new ClientModel(this);
     colonyModel = new ColonyModel(this);
-    server = new Server(clientModel, this);
+    server = new Server(clientModel, colonyModel, this);
 
     ui->clientTable->setModel(clientModel);
     //Resize each column to fit
@@ -37,7 +37,7 @@ ColonyServer::ColonyServer(QWidget *parent) :
     ui->toolBar->insertAction(NULL, ui->configureInterfaceAction);
     ui->toolBar->insertAction(NULL, ui->openCsvAction);
 
-//    server->start();
+    server->start();
 
 }
 

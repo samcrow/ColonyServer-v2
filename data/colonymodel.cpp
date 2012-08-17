@@ -1,7 +1,8 @@
 #include "colonymodel.hpp"
 
 ColonyModel::ColonyModel(QObject *parent) :
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    QList<Colony *>()
 {
 }
 
@@ -29,6 +30,17 @@ void ColonyModel::removeColony(Colony *const&t) {
 
     //Disconnect the mechanism - this colony's done with.
     disconnect(t, SIGNAL(dataChanged()), this, SLOT(colonyDataChanged()));
+}
+
+Colony *ColonyModel::getColonyById(int id) {
+    for(int i = 0, max = length(); i < max; i++) {
+        Colony *colony = at(i);
+        if(colony->getID() == id) {
+            return colony;
+        }
+    }
+
+    return NULL;
 }
 
 //Each colony in the model calls this when it is changed
